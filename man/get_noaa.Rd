@@ -7,15 +7,15 @@
 get_noaa(.date_start, .date_end)
 }
 \arguments{
-\item{date_start}{the starting date to retrieve data for}
+\item{.date_start}{the starting date to retrieve data for}
 
-\item{date_end}{the end date to retrieve data for}
+\item{.date_end}{the end date to retrieve data for}
 }
 \value{
-a data frame
+a tibble of weather data
 }
 \description{
-Returns daily temperature (F), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API token via Sys.setenv(token_noaa = '<token>') prior to use. Request token here get token here https://www.ncdc.noaa.gov/cdo-web/token.
+Returns daily temperature (F), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API token via set_api_key_noaa() prior to use. Request token here get token here https://www.ncdc.noaa.gov/cdo-web/token.
 }
 \examples{
 # set_api_key_noaa('<token>')

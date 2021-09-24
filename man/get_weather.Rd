@@ -10,7 +10,7 @@ get_weather(.dates)
 \item{.dates}{a vector of dates}
 }
 \value{
-a dataframe with nrows == length(.dates)
+a tibble of weather data with nrows == length(.dates)
 }
 \description{
 Returns historical or forecasted temperature (F), precipitation (T/F), and wind speed (mph) for Central Park, NY.

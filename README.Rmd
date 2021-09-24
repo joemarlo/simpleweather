@@ -22,8 +22,9 @@ simpleweather is an R package that simply retrieves weather data for a vector of
 
 ```{r example}
 library(simpleweather)
-dates <- seq(Sys.Date()-10, Sys.Date()+5, by = 'day')
-get_weather(dates)
+dates <- seq(Sys.Date() - 10, Sys.Date() + 5, by = 'day')
+weather <- get_weather(dates)
+tail(weather, 10)
 ```
 
 Currently only works for Central Park, NY. Location argument coming soon.

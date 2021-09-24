@@ -7,10 +7,10 @@
 get_openweather_historical()
 }
 \value{
-
+a tibble of weather data
 }
 \description{
-Returns the last 5 days temperature (F), precipitation (T/F), and wind speed (mph) for Central Park, NY. Must set API token via Sys.setenv(token_openweather = '<token>') prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+Returns the last 5 days temperature (F), precipitation (T/F), and wind speed (mph) for Central Park, NY. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
 }
 \examples{
 # set_api_key_openweather('<token>')

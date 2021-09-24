@@ -1,14 +1,12 @@
 #' Retrieve historical weather data from the NOAA API
 #'
-#' Returns daily temperature (F), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API token via Sys.setenv(token_noaa = '<token>') prior to use. Request token here get token here https://www.ncdc.noaa.gov/cdo-web/token.
+#' Returns daily temperature (F), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API token via set_api_key_noaa() prior to use. Request token here get token here https://www.ncdc.noaa.gov/cdo-web/token.
 #'
-#' @param date_start the starting date to retrieve data for
-#' @param date_end the end date to retrieve data for
+#' @param .date_start the starting date to retrieve data for
+#' @param .date_end the end date to retrieve data for
 #'
-#' @return a data frame
+#' @return a tibble of weather data
 #' @export
-#'
-#' @import dplyr httr tidyr
 #'
 #' @references https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 #'
@@ -42,22 +40,22 @@ get_noaa <- function(.date_start, .date_end){
   resp_df <- purrr::map_dfr(resp_content, function(item) as_tibble(item))
 
   # clean up dataframe
-  resp_df <- resp_df %>%
-    transmute(date = as.Date(date), datatype = datatype, value = value) %>%
-    tidyr::pivot_wider(names_from = datatype) %>%
-    select(date, temperature = TMAX, precipitation = PRCP, wind = WSF2) %>%
-    mutate(precipitation = precipitation > 0.1,
-           is_forecast = FALSE,
-           source = 'NOAA')
+  resp_df <- dplyr::transmute(resp_df, date = as.Date(date), datatype = datatype, value = value)
+  resp_df <- tidyr::pivot_wider(resp_df, names_from = datatype)
+  resp_df <- dplyr::select(resp_df, date, temperature = TMAX, precipitation = PRCP, wind = WSF2)
+  resp_df <- dplyr::mutate(resp_df,
+                           precipitation = precipitation > 0.1,
+                           is_forecast = FALSE,
+                           source = 'NOAA')
 
   return(resp_df)
 }
 
 #' Retrieve forecasted weather data from the OpenWeather API
 #'
-#' Returns the 7-day temperature (F), precipitation (T/F), and wind speed (mph) forecast for Central Park, NY. Precipitation defined as >= 0.35 forecasted probability of rain. Must set API token via Sys.setenv(token_openweather = '<token>') prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+#' Returns the 7-day temperature (F), precipitation (T/F), and wind speed (mph) forecast for Central Park, NY. Precipitation defined as >= 0.35 forecasted probability of rain. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
 #'
-#' @return
+#' @return a tibble of weather data
 #' @export
 #'
 #' @import dplyr httr purrr
@@ -103,9 +101,9 @@ get_openweather_forecast <- function(){
 
 #' Retrieve last 5 days weather data from the OpenWeather API
 #'
-#' Returns the last 5 days temperature (F), precipitation (T/F), and wind speed (mph) for Central Park, NY. Must set API token via Sys.setenv(token_openweather = '<token>') prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+#' Returns the last 5 days temperature (F), precipitation (T/F), and wind speed (mph) for Central Park, NY. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
 #'
-#' @return
+#' @return a tibble of weather data
 #' @export
 #'
 #' @import dplyr httr purrr
@@ -156,7 +154,7 @@ get_openweather_historical <- function(){
 #'
 #' @param .dates a vector of dates
 #'
-#' @return a dataframe with nrows == length(.dates)
+#' @return a tibble of weather data with nrows == length(.dates)
 #' @export
 #'
 #' @examples
