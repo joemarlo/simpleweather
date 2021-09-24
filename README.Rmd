@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-simpleweather is an R package that simply retrieves weather data for a vector of dates:
+simpleweather is an R package that simply retrieves weather data for a vector of dates.
 
 ```{r example}
 library(simpleweather)
@@ -27,7 +27,7 @@ weather <- get_weather(dates)
 tail(weather, 10)
 ```
 
-Currently only works for Central Park, NY. Location argument coming soon.
+Currently only works for Central Park, NY. Location argument in the works
 
 ## Installation
 
@@ -37,3 +37,6 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("joemarlo/simpleweather")
 ```
+
+Requires API keys for the [NOAA API](https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [OpenWeather API](https://openweathermap.org/api/one-call-api).
+

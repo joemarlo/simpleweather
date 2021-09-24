@@ -8,6 +8,8 @@
 #' @return a tibble of weather data
 #' @export
 #'
+#' @import dplyr httr purrr tidyr
+#'
 #' @references https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 #'
 #' @examples
@@ -15,11 +17,12 @@
 #' get_noaa('2021-09-10', '2021-09-22')
 get_noaa <- function(.date_start, .date_end){
 
-  .date_start <- as.Date(.date_start)
-  .date_end <- as.Date(.date_end)
+  # coerce to dates
+  date_start <- as.Date(.date_start)
+  date_end <- as.Date(.date_end)
 
-  if (!inherits(as.Date(.date_start), 'Date') | !inherits(as.Date(.date_end), 'Date')) stop('date_start & date_end must be coercible to dates')
-  if ((.date_end - .date_start) > 365) stop('Date range must be less than a year due to API restrictions')
+  if (!inherits(date_start, 'Date') | !inherits(date_end, 'Date')) stop('date_start & date_end must be coercible to dates')
+  if ((date_end - date_start) > 365) stop('Date range must be less than a year due to API restrictions')
 
   # construct call to NOAA API
   token <- Sys.getenv('token_noaa')
@@ -35,18 +38,18 @@ get_noaa <- function(.date_start, .date_end){
   url_complete <- paste0(url_base, args)
 
   # make the GET request and flatten the response into a dataframe
-  resp <- httr::GET(url_complete, httr::add_headers("token" = token))
-  resp_content <- httr::content(resp)$results
-  resp_df <- purrr::map_dfr(resp_content, function(item) as_tibble(item))
+  resp <- GET(url_complete, add_headers("token" = token))
+  resp_content <- content(resp)$results
+  resp_df <- map_dfr(resp_content, function(item) as_tibble(item))
 
   # clean up dataframe
-  resp_df <- dplyr::transmute(resp_df, date = as.Date(date), datatype = datatype, value = value)
-  resp_df <- tidyr::pivot_wider(resp_df, names_from = datatype)
-  resp_df <- dplyr::select(resp_df, date, temperature = TMAX, precipitation = PRCP, wind = WSF2)
-  resp_df <- dplyr::mutate(resp_df,
-                           precipitation = precipitation > 0.1,
-                           is_forecast = FALSE,
-                           source = 'NOAA')
+  resp_df <- transmute(resp_df, date = as.Date(date), datatype = datatype, value = value)
+  resp_df <- pivot_wider(resp_df, names_from = datatype)
+  resp_df <- select(resp_df, date, temperature = TMAX, precipitation = PRCP, wind = WSF2)
+  resp_df <- mutate(resp_df,
+                    precipitation = precipitation > 0.1,
+                    is_forecast = FALSE,
+                    source = 'NOAA')
 
   return(resp_df)
 }
@@ -79,9 +82,9 @@ get_openweather_forecast <- function(){
   url_complete <- paste0(url_base, args)
 
   # make the GET request and flatten the response into a dataframe
-  resp <- httr::GET(url_complete)
-  resp_content <- httr::content(resp)$daily
-  resp_df <- purrr::map_dfr(resp_content, function(item){
+  resp <- GET(url_complete)
+  resp_content <- content(resp)$daily
+  resp_df <- map_dfr(resp_content, function(item){
 
     # extract data and put in a dataframe
     date <- as.Date(as.POSIXct(item$dt, origin = "1970-01-01"))
@@ -124,7 +127,7 @@ get_openweather_historical <- function(){
 
   # make a call for each of the last 5 days
   dates <- as.numeric(as.POSIXct(Sys.Date()-1:5))
-  resp_df <- purrr::map_dfr(dates, function(dt){
+  resp_df <- map_dfr(dates, function(dt){
 
     # finish API construction
     dt <- paste0('dt=', dt)
@@ -133,8 +136,8 @@ get_openweather_historical <- function(){
     url_complete <- paste0(url_base, args)
 
     # make the GET request and flatten the response into a dataframe
-    resp <- httr::GET(url_complete)
-    resp_content <- httr::content(resp)$current
+    resp <- GET(url_complete)
+    resp_content <- content(resp)$current
     resp_df <- tibble(date = as.Date(as.POSIXct(resp_content$dt, origin = "1970-01-01")),
                       temperature = resp_content$temp,
                       precipitation = resp_content$weather[[1]]$main == 'Rain', # not a perfect solution but seems to work
@@ -157,6 +160,8 @@ get_openweather_historical <- function(){
 #' @return a tibble of weather data with nrows == length(.dates)
 #' @export
 #'
+#' @import dplyr
+#'
 #' @examples
 #' # set_api_key_noaa('<token>')
 #' # set_api_key_openweather('<token>')
@@ -169,7 +174,7 @@ get_weather <- function(.dates){
   # figure out which dates require which API
   current_date <- Sys.Date()
   dates <- sort(unique(.dates))
-  sources <- dplyr::case_when(
+  sources <- case_when(
     dates >= current_date ~ 'OpenWeather_forecast',
     dates >= (current_date - 5) ~ 'OpenWeather_historical',
     TRUE ~ 'NOAA'
@@ -193,8 +198,8 @@ get_weather <- function(.dates){
   }
 
   # construct dataframe and ensure its the same order as the original vector
-  weather_data <- dplyr::bind_rows(OpenWeather_forecast, OpenWeather_historical, NOAA)
-  weather_data <- dplyr::left_join(tibble(date = .dates), weather_data, by = 'date')
+  weather_data <- bind_rows(OpenWeather_forecast, OpenWeather_historical, NOAA)
+  weather_data <- left_join(tibble(date = .dates), weather_data, by = 'date')
 
   return(weather_data)
 }

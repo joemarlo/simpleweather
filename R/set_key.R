@@ -9,7 +9,7 @@
 set_key_ <- function(.name, api_key, install){
 
   # TODO: error handling
-  # TODO: global set
+  # TODO: global install
 
   # set the key
   expr <- paste0("Sys.setenv(", .name, " = '", api_key, "')")
@@ -23,7 +23,6 @@ set_key_ <- function(.name, api_key, install){
 #' @param api_key the api key string
 #' @param install should the key be installed to the .Renviron file for use in future sessions?
 #'
-#' @return
 #' @export
 #'
 #' @examples
@@ -39,7 +38,6 @@ set_api_key_noaa <- function(api_key, install = FALSE){
 #' @param api_key the api key string
 #' @param install should the key be installed to the .Renviron file for use in future sessions?
 #'
-#' @return
 #' @export
 #'
 #' @examples
