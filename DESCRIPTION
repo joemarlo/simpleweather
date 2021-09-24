@@ -1,0 +1,14 @@
+Package: simpleweather
+Title: Simply retrives weather data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Joseph",
+           family = "Marlo",
+           role = c("aut", "cre"),
+           email = "joe.marlo.09@gmail.com")
+Description: simpleweather is an R package that simply retrieves weather data for a vector of dates.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
