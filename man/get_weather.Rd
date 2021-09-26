@@ -4,20 +4,29 @@
 \alias{get_weather}
 \title{Retrieve historical or forecasted weather}
 \usage{
-get_weather(.dates)
+get_weather(.dates, lat, long)
 }
 \arguments{
 \item{.dates}{a vector of dates}
+
+\item{lat}{a double representing latitude in decimal format}
+
+\item{long}{a double representing longitude in decimal format}
 }
 \value{
 a tibble of weather data with nrows == length(.dates)
 }
 \description{
-Returns historical or forecasted temperature (F), precipitation (T/F), and wind speed (mph) for Central Park, NY.
+Returns historical or forecasted temperature (F), precipitation (T/F), and wind speed (mph). Only available for United States locations.
+}
+\details{
+Temperature is the max daily temperature, precipitation is TRUE if historical is greater than 0.1 inches or forecast probability is greater than 0.35, and wind speed is the fastest 2-minute wind speed.
 }
 \examples{
 # set_api_key_noaa('<token>')
 # set_api_key_openweather('<token>')
-dates <- seq(Sys.Date() - 10, Sys.Date() + 5, by = 'day')
-get_weather(.dates = dates)
+dates <- Sys.Date() + -10:5
+lat <- 40.7812
+long <- -73.9665
+get_weather(dates, lat, long)
 }

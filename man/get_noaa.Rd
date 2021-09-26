@@ -4,22 +4,27 @@
 \alias{get_noaa}
 \title{Retrieve historical weather data from the NOAA API}
 \usage{
-get_noaa(.date_start, .date_end)
+get_noaa(.date_start, .date_end, noaa_station)
 }
 \arguments{
 \item{.date_start}{the starting date to retrieve data for}
 
 \item{.date_end}{the end date to retrieve data for}
+
+\item{noaa_station}{the id of the NOAA station}
 }
 \value{
 a tibble of weather data
 }
 \description{
-Returns daily temperature (F), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API token via set_api_key_noaa() prior to use. Request token here get token here https://www.ncdc.noaa.gov/cdo-web/token.
+Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API token via set_api_key_noaa() prior to use. Request token here get token here https://www.ncdc.noaa.gov/cdo-web/token.
 }
 \examples{
 # set_api_key_noaa('<token>')
-get_noaa('2021-09-10', '2021-09-22')
+# date_start <- '2021-09-10'
+# date_end <- '2021-09-22'
+# noaa_station <- 'GHCND:USW00094728'
+# get_noaa(date_start, date_end, noaa_station)
 }
 \references{
 https://www.ncdc.noaa.gov/cdo-web/webservices/v2

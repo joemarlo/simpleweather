@@ -14,6 +14,9 @@ set_api_key_noaa(api_key, install = FALSE)
 \description{
 Set your NOAA API key. This stores it as an environment variable so it can be used with simpleweather functions. You can install the key to your .Renviron so calling this function is not required for each R session.
 }
+\details{
+You can obtain an API key for free here: https://www.ncdc.noaa.gov/cdo-web/webservices/v2
+}
 \examples{
 # set_api_key_noaa("<token>")
 }

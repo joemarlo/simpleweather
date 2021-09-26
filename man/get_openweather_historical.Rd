@@ -4,17 +4,24 @@
 \alias{get_openweather_historical}
 \title{Retrieve last 5 days weather data from the OpenWeather API}
 \usage{
-get_openweather_historical()
+get_openweather_historical(lat, long)
+}
+\arguments{
+\item{lat}{a double representing latitude}
+
+\item{long}{a double representing longitude}
 }
 \value{
 a tibble of weather data
 }
 \description{
-Returns the last 5 days temperature (F), precipitation (T/F), and wind speed (mph) for Central Park, NY. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+Returns the last 5 days temperature (Fahrenheit), precipitation (T/F), and wind speed (mph) for Central Park, NY. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
 }
 \examples{
 # set_api_key_openweather('<token>')
-get_openweather_historical()
+# lat <- 40.7812
+# long <- -73.9665
+# get_openweather_historical(lat, long)
 }
 \references{
 https://openweathermap.org/api/one-call-api

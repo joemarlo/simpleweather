@@ -4,17 +4,24 @@
 \alias{get_openweather_forecast}
 \title{Retrieve forecasted weather data from the OpenWeather API}
 \usage{
-get_openweather_forecast()
+get_openweather_forecast(lat, long)
+}
+\arguments{
+\item{lat}{a double representing latitude}
+
+\item{long}{a double representing longitude}
 }
 \value{
 a tibble of weather data
 }
 \description{
-Returns the 7-day temperature (F), precipitation (T/F), and wind speed (mph) forecast for Central Park, NY. Precipitation defined as >= 0.35 forecasted probability of rain. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+Returns the 7-day temperature (Fahrenheit), precipitation (T/F), and wind speed (mph) forecast for Central Park, NY. Precipitation defined as >= 0.35 forecasted probability of rain. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
 }
 \examples{
 # set_api_key_openweather('<token>')
-get_openweather_forecast()
+# lat <- 40.7812
+# long <- -73.9665
+# get_openweather_forecast(lat, long)
 }
 \references{
 https://openweathermap.org/api/one-call-api

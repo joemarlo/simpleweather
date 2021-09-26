@@ -1,6 +1,8 @@
 test_date <- as.Date("2021-09-24")
 dates <- seq(test_date - 10, test_date + 5, by = 'day')
-weather <- get_weather(.dates = dates)
+lat <- 40.7812
+long <- -73.9665
+weather <- get_weather(dates, lat, long)
 
 test_that("get_weather returns a dataframe with the correct length", {
   expect_true(inherits(weather, 'data.frame'))

@@ -16,20 +16,20 @@ knitr::opts_chunk$set(
 # simpleweather
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/joemarlo/simpleweather/workflows/R-CMD-check/badge.svg)](https://github.com/joemarlo/simpleweather/actions)
 <!-- badges: end -->
 
-simpleweather is an R package that simply retrieves weather data for a vector of dates.
+simpleweather is an R package that simply retrieves daily weather data.
 
 ```{r example}
 library(simpleweather)
-dates <- seq(Sys.Date() - 10, Sys.Date() + 5, by = 'day')
-weather <- get_weather(dates)
-tail(weather, 10)
+dates <- Sys.Date() + -7:2
+lat <- 40.7812
+long <- -73.9665
+get_weather(dates, lat, long)
 ```
 
-Currently only works for Central Park, NY. Location argument in the works
-
-## Installation
+## Installation and setup
 
 You can install the development version from [GitHub](https://github.com/) with:
 
@@ -38,5 +38,11 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("joemarlo/simpleweather")
 ```
 
-Requires API keys for the [NOAA API](https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [OpenWeather API](https://openweathermap.org/api/one-call-api).
+Requires API keys for the [NOAA API]((https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [OpenWeather API](https://openweathermap.org/api/one-call-api). You can request those keys for free [here](https://www.ncdc.noaa.gov/cdo-web/token) and [here](https://openweathermap.org/price). Historical NOAA weather data only available for the United States.
 
+And then log your API keys via the set_api_key_* functions.
+
+``` r
+set_api_key_noaa("<token>")
+set_api_key_openweather("<token>")
+```

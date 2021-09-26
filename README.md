@@ -4,35 +4,36 @@
 # simpleweather
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/joemarlo/simpleweather/workflows/R-CMD-check/badge.svg)](https://github.com/joemarlo/simpleweather/actions)
 <!-- badges: end -->
 
-simpleweather is an R package that simply retrieves weather data for a
-vector of dates.
+simpleweather is an R package that simply retrieves daily weather data.
 
 ``` r
 library(simpleweather)
-dates <- seq(Sys.Date() - 10, Sys.Date() + 5, by = 'day')
-weather <- get_weather(dates)
-tail(weather, 10)
+dates <- Sys.Date() + -7:2
+lat <- 40.7812
+long <- -73.9665
+get_weather(dates, lat, long)
+#> Using NOAA station LAGUARDIA AIRPORT, NY US
+#> OpenWeather uses exact latitude, longitude provided
 #> # A tibble: 10 × 6
 #>    date       temperature precipitation  wind is_forecast source     
 #>    <date>           <dbl> <lgl>         <dbl> <lgl>       <chr>      
-#>  1 2021-09-20        70.6 FALSE          4    FALSE       OpenWeather
-#>  2 2021-09-21        68.1 FALSE          5.99 FALSE       OpenWeather
-#>  3 2021-09-22        72.2 FALSE          4    FALSE       OpenWeather
-#>  4 2021-09-23        75.5 FALSE          5.01 FALSE       OpenWeather
-#>  5 2021-09-24        76.1 TRUE          10.0  TRUE        OpenWeather
-#>  6 2021-09-25        78.1 FALSE          6.93 TRUE        OpenWeather
-#>  7 2021-09-26        74.4 FALSE         14.2  TRUE        OpenWeather
-#>  8 2021-09-27        77.3 FALSE         14.0  TRUE        OpenWeather
-#>  9 2021-09-28        77.3 FALSE         11.6  TRUE        OpenWeather
-#> 10 2021-09-29        67.6 FALSE         11.6  TRUE        OpenWeather
+#>  1 2021-09-19        78   FALSE         18.1  FALSE       NOAA       
+#>  2 2021-09-20        76   FALSE         15    FALSE       NOAA       
+#>  3 2021-09-21        66.8 FALSE          6.62 FALSE       OpenWeather
+#>  4 2021-09-22        72.2 FALSE          4    FALSE       OpenWeather
+#>  5 2021-09-23        75.5 FALSE          5.01 FALSE       OpenWeather
+#>  6 2021-09-24        69.8 TRUE           5.75 FALSE       OpenWeather
+#>  7 2021-09-25        67.8 FALSE          6.91 FALSE       OpenWeather
+#>  8 2021-09-26        72.9 FALSE         15.5  TRUE        OpenWeather
+#>  9 2021-09-27        78.2 FALSE         15.8  TRUE        OpenWeather
+#> 10 2021-09-28        73.5 TRUE          10.1  TRUE        OpenWeather
 ```
 
-Currently only works for Central Park, NY. Location argument in the
-works
-
-## Installation
+## Installation and setup
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -42,6 +43,17 @@ You can install the development version from
 devtools::install_github("joemarlo/simpleweather")
 ```
 
-Requires API keys for the [NOAA
-API](https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [OpenWeather
-API](https://openweathermap.org/api/one-call-api).
+Requires API keys for the \[NOAA
+API\]((<https://www.ncdc.noaa.gov/cdo-web/webservices/v2>) and
+[OpenWeather API](https://openweathermap.org/api/one-call-api). You can
+request those keys for free
+[here](https://www.ncdc.noaa.gov/cdo-web/token) and
+[here](https://openweathermap.org/price). Historical NOAA weather data
+only available for the United States.
+
+And then log your API keys via the set\_api\_key\_\* functions.
+
+``` r
+set_api_key_noaa("<token>")
+set_api_key_openweather("<token>")
+```
