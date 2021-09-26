@@ -25,8 +25,8 @@ Temperature is the max daily temperature, precipitation is TRUE if historical is
 \examples{
 # set_api_key_noaa('<token>')
 # set_api_key_openweather('<token>')
-dates <- Sys.Date() + -10:5
-lat <- 40.7812
-long <- -73.9665
-get_weather(dates, lat, long)
+# dates <- Sys.Date() + -10:5
+# lat <- 40.7812
+# long <- -73.9665
+# get_weather(dates, lat, long)
 }

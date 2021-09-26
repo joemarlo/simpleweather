@@ -46,3 +46,10 @@ And then log your API keys via the set_api_key_* functions.
 set_api_key_noaa("<token>")
 set_api_key_openweather("<token>")
 ```
+
+## Todo
+
+- Remove `tibble` dependency
+- Figure out how to run tests w/o explicit API key
+- Double check documentation is correct of weather variables
+- Implement rate limiting messages?

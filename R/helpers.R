@@ -45,7 +45,7 @@ get_closest_noaa_station <- function(.date_start, .date_end, lat, long){
   stop_for_status(resp)
   warn_for_status(resp)
   resp_content <- bind_rows(content(resp)$results)
-  if (nrow(resp_content) == 0) stop(paste0('No NOAA station found within +/- ', range, ' degrees.'))
+  if (nrow(resp_content) == 0) stop(paste0('No NOAA station found within +/- ', range, ' degrees that contains data for all dates provided.'))
 
   # calculate closest station based on lat long
   # euclidean distance should work well enough
