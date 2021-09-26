@@ -43,11 +43,10 @@ You can install the development version from
 devtools::install_github("joemarlo/simpleweather")
 ```
 
-Requires API keys for the \[NOAA
-API\]((<https://www.ncdc.noaa.gov/cdo-web/webservices/v2>) and
-[OpenWeather API](https://openweathermap.org/api/one-call-api). You can
-request those keys for free
-[here](https://www.ncdc.noaa.gov/cdo-web/token) and
+Requires API keys for the [NOAA
+API](https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [OpenWeather
+API](https://openweathermap.org/api/one-call-api). You can request those
+keys for free [here](https://www.ncdc.noaa.gov/cdo-web/token) and
 [here](https://openweathermap.org/price). Historical NOAA weather data
 only available for the United States.
 

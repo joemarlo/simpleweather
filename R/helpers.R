@@ -41,7 +41,7 @@ get_closest_noaa_station <- function(.date_start, .date_end, lat, long){
   url_complete <- paste0(url_base, args)
 
   # call the API and get the data
-  resp <- GET(url_complete, add_headers("token" = token))
+  resp <- GET(url_complete, add_headers("token" = token), user_agent('https://github.com/joemarlo/simpleweather'))
   stop_for_status(resp)
   warn_for_status(resp)
   resp_content <- bind_rows(content(resp)$results)

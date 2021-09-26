@@ -46,7 +46,7 @@ get_noaa <- function(.date_start, .date_end, noaa_station){
   url_complete <- paste0(url_base, args)
 
   # make the GET request and flatten the response into a dataframe
-  resp <- GET(url_complete, add_headers("token" = token))
+  resp <- GET(url_complete, add_headers("token" = token), user_agent('https://github.com/joemarlo/simpleweather'))
   stop_for_status(resp)
   warn_for_status(resp)
   resp_content <- content(resp)$results
@@ -101,7 +101,7 @@ get_openweather_forecast <- function(lat, long){
   url_complete <- paste0(url_base, args)
 
   # make the GET request and flatten the response into a dataframe
-  resp <- GET(url_complete)
+  resp <- GET(url_complete, user_agent('https://github.com/joemarlo/simpleweather'))
   stop_for_status(resp)
   warn_for_status(resp)
   resp_content <- content(resp)$daily
@@ -167,7 +167,7 @@ get_openweather_historical <- function(lat, long){
     url_complete <- paste0(url_base, args)
 
     # make the GET request and flatten the response into a dataframe
-    resp <- GET(url_complete)
+    resp <- GET(url_complete, user_agent('https://github.com/joemarlo/simpleweather'))
     stop_for_status(resp)
     warn_for_status(resp)
     resp_content <- content(resp)$current
