@@ -15,10 +15,10 @@ get_openweather_forecast(lat, long)
 a tibble of weather data
 }
 \description{
-Returns the 7-day temperature (Fahrenheit), precipitation (T/F), and wind speed (mph) forecast for Central Park, NY. Precipitation defined as >= 0.35 forecasted probability of rain. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+Returns the 7-day temperature (Fahrenheit), precipitation (T/F), and wind speed (mph). Precipitation defined as >= 0.35 forecasted probability of rain. Must set API key via set_api_key_openweather() prior to use. Request key here get key here https://openweathermap.org/full-price#current.
 }
 \examples{
-# set_api_key_openweather('<token>')
+# set_api_key_openweather('<key>')
 # lat <- 40.7812
 # long <- -73.9665
 # get_openweather_forecast(lat, long)

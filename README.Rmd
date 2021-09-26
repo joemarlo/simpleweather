@@ -47,9 +47,12 @@ set_api_key_noaa("<token>")
 set_api_key_openweather("<token>")
 ```
 
+Please credit NOAA and/or OpenWeather as your weather data provider depending on your use.
+
 ## Todo
 
 - Remove `tibble` dependency
 - Figure out how to run tests w/o explicit API key
-- Double check documentation is correct of weather variables
+- Double check documentation is correct for weather variables
 - Implement rate limiting messages?
+- add 'show_requests' argument to get_weather

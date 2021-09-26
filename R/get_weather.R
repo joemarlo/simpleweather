@@ -1,6 +1,6 @@
 #' Retrieve historical weather data from the NOAA API
 #'
-#' Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API token via set_api_key_noaa() prior to use. Request token here get token here https://www.ncdc.noaa.gov/cdo-web/token.
+#' Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API key via set_api_key_noaa() prior to use. Request key here get key here https://www.ncdc.noaa.gov/cdo-web/token
 #'
 #' @param .date_start the starting date to retrieve data for
 #' @param .date_end the end date to retrieve data for
@@ -17,7 +17,7 @@
 #' @references https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 #'
 #' @examples
-#' # set_api_key_noaa('<token>')
+#' # set_api_key_noaa('<key>')
 #' # date_start <- '2021-09-10'
 #' # date_end <- '2021-09-22'
 #' # noaa_station <- 'GHCND:USW00094728'
@@ -68,7 +68,7 @@ get_noaa <- function(.date_start, .date_end, noaa_station){
 
 #' Retrieve forecasted weather data from the OpenWeather API
 #'
-#' Returns the 7-day temperature (Fahrenheit), precipitation (T/F), and wind speed (mph) forecast for Central Park, NY. Precipitation defined as >= 0.35 forecasted probability of rain. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+#' Returns the 7-day temperature (Fahrenheit), precipitation (T/F), and wind speed (mph). Precipitation defined as >= 0.35 forecasted probability of rain. Must set API key via set_api_key_openweather() prior to use. Request key here get key here https://openweathermap.org/full-price#current.
 #'
 #' @param lat a double representing latitude
 #' @param long a double representing longitude
@@ -82,7 +82,7 @@ get_noaa <- function(.date_start, .date_end, noaa_station){
 #' @references https://openweathermap.org/api/one-call-api
 #'
 #' @examples
-#' # set_api_key_openweather('<token>')
+#' # set_api_key_openweather('<key>')
 #' # lat <- 40.7812
 #' # long <- -73.9665
 #' # get_openweather_forecast(lat, long)
@@ -128,7 +128,7 @@ get_openweather_forecast <- function(lat, long){
 
 #' Retrieve last 5 days weather data from the OpenWeather API
 #'
-#' Returns the last 5 days temperature (Fahrenheit), precipitation (T/F), and wind speed (mph) for Central Park, NY. Must set API token via set_api_key_openweather() prior to use. Request token here get token here https://openweathermap.org/full-price#current.
+#' Returns the last 5 days temperature (Fahrenheit), precipitation (T/F), and wind speed (mph). Must set API key via set_api_key_openweather() prior to use. Request key here get key here https://openweathermap.org/full-price#current.
 #'
 #' @param lat a double representing latitude
 #' @param long a double representing longitude
@@ -142,7 +142,7 @@ get_openweather_forecast <- function(lat, long){
 #' @references https://openweathermap.org/api/one-call-api
 #'
 #' @examples
-#' # set_api_key_openweather('<token>')
+#' # set_api_key_openweather('<key>')
 #' # lat <- 40.7812
 #' # long <- -73.9665
 #' # get_openweather_historical(lat, long)
@@ -186,7 +186,7 @@ get_openweather_historical <- function(lat, long){
 
 #' Retrieve historical or forecasted weather
 #'
-#' Returns historical or forecasted temperature (F), precipitation (T/F), and wind speed (mph). Only available for United States locations.
+#' Returns historical or forecasted temperature (F), precipitation (T/F), and wind speed (mph). Only available for United States locations. Forecast limited to next seven days.
 #'
 #' Temperature is the max daily temperature, precipitation is TRUE if historical is greater than 0.1 inches or forecast probability is greater than 0.35, and wind speed is the fastest 2-minute wind speed.
 #'
@@ -198,11 +198,11 @@ get_openweather_historical <- function(lat, long){
 #' @export
 #'
 #' @importFrom purrr map2_dfr
-#' @importFrom dplyr bind_rows left_join case_when
+#' @importFrom dplyr bind_rows left_join case_when distinct
 #'
 #' @examples
-#' # set_api_key_noaa('<token>')
-#' # set_api_key_openweather('<token>')
+#' # set_api_key_noaa('<key>')
+#' # set_api_key_openweather('<key>')
 #' # dates <- Sys.Date() + -10:5
 #' # lat <- 40.7812
 #' # long <- -73.9665
@@ -249,7 +249,11 @@ get_weather <- function(.dates, lat, long){
 
   # construct dataframe and ensure its the same order as the original vector
   weather_data <- bind_rows(OpenWeather_forecast, OpenWeather_historical, NOAA)
+  weather_data <- distinct(weather_data)
   weather_data <- left_join(tibble(date = .dates), weather_data, by = 'date')
+
+  # make sure output is same length as input
+  if (nrow(weather_data) != length(.dates)) stop("Internal error: output data does not match input .dates. If this continues, please raise an issue on https://github.com/joemarlo/simpleweather/issues")
 
   return(weather_data)
 }
