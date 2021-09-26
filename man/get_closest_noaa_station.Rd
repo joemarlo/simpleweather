@@ -22,10 +22,12 @@ string containing the NOAA station ID
 Finds the closest NOAA station based on a given latitude, longitude. Only considers NOAA stations that contain temperature, precipitation, and wind speed for the provided dates and are within +/- 1 degree.
 }
 \examples{
-# set_api_key_noaa('<token>')
-# date_start <- '2021-09-10'
-# date_end <- '2021-09-22'
-# lat <- 40.7812
-# long <- -73.9665
-# get_closest_noaa_station(date_start, date_end, lat, long)
+\dontrun{
+set_api_key_noaa('<token>')
+date_start <- '2021-09-10'
+date_end <- '2021-09-22'
+lat <- 40.7812
+long <- -73.9665
+get_closest_noaa_station(date_start, date_end, lat, long)
+}
 }

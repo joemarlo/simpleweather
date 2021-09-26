@@ -20,5 +20,7 @@ Set your NOAA API key. This stores it as an environment variable so it can be us
 You can obtain an API key for free here: https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 }
 \examples{
-# set_api_key_noaa("<key>")
+\dontrun{
+set_api_key_noaa("<key>")
+}
 }

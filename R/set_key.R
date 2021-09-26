@@ -7,9 +7,17 @@
 #' @param api_key the api key string
 #' @param install should the key be installed to the .Renviron file for use in future sessions?
 #' @param overwrite if a key is already installed, should it be overwritten?
+#'
+#' @importFrom utils write.table
 set_key_ <- function(.name, api_key, install, overwrite){
 
   if (!is.character(api_key)) stop('api_key must be a character string')
+
+  # TODO: test API key validity?
+
+  # set the key for this session
+  expr <- paste0("Sys.setenv(", .name, " = '", api_key, "')")
+  eval(parse(text = expr))
 
   if (isTRUE(install)){
     rhome <- Sys.getenv("HOME")
@@ -37,13 +45,10 @@ set_key_ <- function(.name, api_key, install, overwrite){
       # add in new key and write out
       renv_new <- c(renv_new, paste0(.name, "='", api_key, "'"))
       write.table(renv_new, renv, quote = FALSE, sep = '\n', row.names = FALSE, col.names = FALSE)
-      message('API key has been stored for future sessions. Restart R to use now.')
+      message('API key has been installed for future sessions')
     }
   } else {
-    # set the key for this session only
-    expr <- paste0("Sys.setenv(", .name, " = '", api_key, "')")
-    eval(parse(text = expr))
-    message("API key has been stored for this session. If you'd like to install for future sessions then use `install = TRUE`")
+    message("API key has been installed for this session only. If you'd like to install for future sessions then use `install = TRUE`")
   }
 }
 
@@ -59,8 +64,9 @@ set_key_ <- function(.name, api_key, install, overwrite){
 #'
 #' @export
 #'
-#' @examples
-#' # set_api_key_noaa("<key>")
+#' @examples \dontrun{
+#' set_api_key_noaa("<key>")
+#' }
 set_api_key_noaa <- function(api_key, install = FALSE, overwrite = FALSE){
   set_key_(.name = "token_noaa", api_key = api_key, install = install, overwrite = overwrite)
 }
@@ -77,8 +83,9 @@ set_api_key_noaa <- function(api_key, install = FALSE, overwrite = FALSE){
 #'
 #' @export
 #'
-#' @examples
-#' # set_api_key_openweather("<key>")
+#' @examples \dontrun{
+#' set_api_key_openweather("<key>")
+#' }
 set_api_key_openweather <- function(api_key, install = FALSE, overwrite = FALSE){
   set_key_(.name = "token_openweather", api_key = api_key, install = install, overwrite = overwrite)
 }

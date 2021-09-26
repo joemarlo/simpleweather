@@ -20,11 +20,13 @@ a tibble of weather data
 Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API key via set_api_key_noaa() prior to use. Request key here get key here https://www.ncdc.noaa.gov/cdo-web/token
 }
 \examples{
-# set_api_key_noaa('<key>')
-# date_start <- '2021-09-10'
-# date_end <- '2021-09-22'
-# noaa_station <- 'GHCND:USW00094728'
-# get_noaa(date_start, date_end, noaa_station)
+\dontrun{
+set_api_key_noaa('<key>')
+date_start <- '2021-09-10'
+date_end <- '2021-09-22'
+noaa_station <- 'GHCND:USW00094728'
+get_noaa(date_start, date_end, noaa_station)
+}
 }
 \references{
 https://www.ncdc.noaa.gov/cdo-web/webservices/v2

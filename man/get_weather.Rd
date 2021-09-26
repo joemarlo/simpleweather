@@ -23,10 +23,12 @@ Returns historical or forecasted temperature (F), precipitation (T/F), and wind 
 Temperature is the max daily temperature, precipitation is TRUE if historical is greater than 0.1 inches or forecast probability is greater than 0.35, and wind speed is the fastest 2-minute wind speed.
 }
 \examples{
-# set_api_key_noaa('<key>')
-# set_api_key_openweather('<key>')
-# dates <- Sys.Date() + -10:5
-# lat <- 40.7812
-# long <- -73.9665
-# get_weather(dates, lat, long)
+\dontrun{
+set_api_key_noaa('<key>')
+set_api_key_openweather('<key>')
+dates <- Sys.Date() + -10:5
+lat <- 40.7812
+long <- -73.9665
+get_weather(dates, lat, long)
+}
 }

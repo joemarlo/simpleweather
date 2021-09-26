@@ -19,7 +19,9 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/joemarlo/simpleweather/workflows/R-CMD-check/badge.svg)](https://github.com/joemarlo/simpleweather/actions)
 <!-- badges: end -->
 
-simpleweather is an R package that simply retrieves daily weather data.
+simpleweather is an R package that provides a simple interface to get historical and forecasted weather. It does one thing: retrieve weather data for a given latitude, longitude location. No anguish to figure out which data source to use, esoteric weather variable to pick, or weather station to choose.
+
+simpleweather is focused and therefore limited to only providing the temperature (daily max in Fahrenheit), precipitation (True/False), and the wind speed (fastest 2-minute speed in mph). The package leverages NOAA for historical data and OpenWeather for the latest data.
 
 ```{r example}
 library(simpleweather)
@@ -31,7 +33,7 @@ get_weather(dates, lat, long)
 
 ## Installation and setup
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/joemarlo/simpleweather) with:
 
 ``` r
 # install.packages("devtools")
@@ -55,4 +57,5 @@ Please credit NOAA and/or OpenWeather as your weather data provider depending on
 - Figure out how to run tests w/o explicit API key
 - Double check documentation is correct for weather variables
 - Implement rate limiting messages?
-- add 'show_requests' argument to get_weather
+- Add 'show_requests' argument to get_weather
+- Add API key test to set_* functions?

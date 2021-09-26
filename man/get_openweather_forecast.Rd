@@ -18,10 +18,12 @@ a tibble of weather data
 Returns the 7-day temperature (Fahrenheit), precipitation (T/F), and wind speed (mph). Precipitation defined as >= 0.35 forecasted probability of rain. Must set API key via set_api_key_openweather() prior to use. Request key here get key here https://openweathermap.org/full-price#current.
 }
 \examples{
-# set_api_key_openweather('<key>')
-# lat <- 40.7812
-# long <- -73.9665
-# get_openweather_forecast(lat, long)
+\dontrun{
+set_api_key_openweather('<key>')
+lat <- 40.7812
+long <- -73.9665
+get_openweather_forecast(lat, long)
+}
 }
 \references{
 https://openweathermap.org/api/one-call-api

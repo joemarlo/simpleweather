@@ -20,5 +20,7 @@ Set your OpenWeather API key. This stores it as an environment variable so it ca
 You can obtain an API key for free here: https://openweathermap.org/api/one-call-api
 }
 \examples{
-# set_api_key_openweather("<key>")
+\dontrun{
+set_api_key_openweather("<key>")
+}
 }

@@ -16,12 +16,13 @@
 #'
 #' @references https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 #'
-#' @examples
-#' # set_api_key_noaa('<key>')
-#' # date_start <- '2021-09-10'
-#' # date_end <- '2021-09-22'
-#' # noaa_station <- 'GHCND:USW00094728'
-#' # get_noaa(date_start, date_end, noaa_station)
+#' @examples \dontrun{
+#' set_api_key_noaa('<key>')
+#' date_start <- '2021-09-10'
+#' date_end <- '2021-09-22'
+#' noaa_station <- 'GHCND:USW00094728'
+#' get_noaa(date_start, date_end, noaa_station)
+#' }
 get_noaa <- function(.date_start, .date_end, noaa_station){
 
   # coerce to dates
@@ -81,11 +82,12 @@ get_noaa <- function(.date_start, .date_end, noaa_station){
 #'
 #' @references https://openweathermap.org/api/one-call-api
 #'
-#' @examples
-#' # set_api_key_openweather('<key>')
-#' # lat <- 40.7812
-#' # long <- -73.9665
-#' # get_openweather_forecast(lat, long)
+#' @examples \dontrun{
+#' set_api_key_openweather('<key>')
+#' lat <- 40.7812
+#' long <- -73.9665
+#' get_openweather_forecast(lat, long)
+#' }
 get_openweather_forecast <- function(lat, long){
 
   # construct call to OpenWeather API
@@ -141,11 +143,12 @@ get_openweather_forecast <- function(lat, long){
 #'
 #' @references https://openweathermap.org/api/one-call-api
 #'
-#' @examples
-#' # set_api_key_openweather('<key>')
-#' # lat <- 40.7812
-#' # long <- -73.9665
-#' # get_openweather_historical(lat, long)
+#' @examples \dontrun{
+#' set_api_key_openweather('<key>')
+#' lat <- 40.7812
+#' long <- -73.9665
+#' get_openweather_historical(lat, long)
+#' }
 get_openweather_historical <- function(lat, long){
 
   # construct call to OpenWeather API
@@ -200,13 +203,14 @@ get_openweather_historical <- function(lat, long){
 #' @importFrom purrr map2_dfr
 #' @importFrom dplyr bind_rows left_join case_when distinct
 #'
-#' @examples
-#' # set_api_key_noaa('<key>')
-#' # set_api_key_openweather('<key>')
-#' # dates <- Sys.Date() + -10:5
-#' # lat <- 40.7812
-#' # long <- -73.9665
-#' # get_weather(dates, lat, long)
+#' @examples \dontrun{
+#' set_api_key_noaa('<key>')
+#' set_api_key_openweather('<key>')
+#' dates <- Sys.Date() + -10:5
+#' lat <- 40.7812
+#' long <- -73.9665
+#' get_weather(dates, lat, long)
+#' }
 get_weather <- function(.dates, lat, long){
 
   dates <- as.Date(.dates)

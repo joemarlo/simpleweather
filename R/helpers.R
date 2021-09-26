@@ -12,13 +12,14 @@
 #' @import httr
 #' @importFrom dplyr bind_rows
 #'
-#' @examples
-#' # set_api_key_noaa('<token>')
-#' # date_start <- '2021-09-10'
-#' # date_end <- '2021-09-22'
-#' # lat <- 40.7812
-#' # long <- -73.9665
-#' # get_closest_noaa_station(date_start, date_end, lat, long)
+#' @examples \dontrun{
+#' set_api_key_noaa('<token>')
+#' date_start <- '2021-09-10'
+#' date_end <- '2021-09-22'
+#' lat <- 40.7812
+#' long <- -73.9665
+#' get_closest_noaa_station(date_start, date_end, lat, long)
+#' }
 get_closest_noaa_station <- function(.date_start, .date_end, lat, long){
 
   # coerce to dates
