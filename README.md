@@ -27,6 +27,7 @@ dates <- Sys.Date() + -7:2
 lat <- 40.7812
 long <- -73.9665
 get_weather(dates, lat, long)
+#> [1] "9ae8f3676ff29f0e86a05901e1ff9130"
 #> Using NOAA station LAGUARDIA AIRPORT, NY US
 #> OpenWeather uses exact latitude, longitude provided
 #> # A tibble: 10 × 6
@@ -39,7 +40,7 @@ get_weather(dates, lat, long)
 #>  5 2021-09-24        69.8 TRUE           5.75 FALSE       OpenWeather
 #>  6 2021-09-25        67.8 FALSE          6.91 FALSE       OpenWeather
 #>  7 2021-09-26        69.2 FALSE          0    FALSE       OpenWeather
-#>  8 2021-09-27        78.9 FALSE         16.8  TRUE        OpenWeather
+#>  8 2021-09-27        79.1 FALSE         16.8  TRUE        OpenWeather
 #>  9 2021-09-28        77.8 TRUE          11.9  TRUE        OpenWeather
 #> 10 2021-09-29        70.3 FALSE         12.6  TRUE        OpenWeather
 ```
@@ -90,7 +91,6 @@ control over requesting data from the NOAA and OpenWeather APIs.
 
 ## Todo
 
--   Figure out how to run tests w/o explicit API key
 -   Implement rate limiting messages?
 -   Add ‘show\_requests’ argument to get\_weather
 -   Add API key test to set\_\* functions?

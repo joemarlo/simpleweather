@@ -68,7 +68,6 @@ For more detailed weather data, check out the R packages [rnoaa](https://github.
 
 ## Todo
 
-- Figure out how to run tests w/o explicit API key
 - Implement rate limiting messages?
 - Add 'show_requests' argument to get_weather
 - Add API key test to set_* functions?

@@ -94,7 +94,6 @@ get_openweather_forecast <- function(lat, long){
   # construct call to OpenWeather API
   token <- Sys.getenv('token_openweather')
   if (token == '') stop('No API key set for OpenWeather. Please use simpleweather::set_api_key_openweather()', call. = FALSE)
-  print(token)
   token <- paste0('appid=', token)
   lat <- paste0('lat=', lat) #40.7812
   long <- paste0('lon=', long) #-73.9665'
