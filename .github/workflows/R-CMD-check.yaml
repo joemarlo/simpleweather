@@ -43,7 +43,7 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
-      - uses: joemarlo/simpleweather/check-r-package@main
+      - uses: joemarlo/simpleweather/.github/check-r-package@main
         with:
           token_noaa: ${{ secrets.TOKEN_NOAA }}
           token_openweather: ${{ secrets.TOKEN_OPENWEATHER }}
