@@ -17,7 +17,7 @@ get_noaa(.date_start, .date_end, noaa_station)
 a tibble of weather data
 }
 \description{
-Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API key via set_api_key_noaa() prior to use. Request key here get key here https://www.ncdc.noaa.gov/cdo-web/token
+Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data using the NOAA API. Must set API key via set_api_key_noaa() prior to use. Request key here get key here https://www.ncdc.noaa.gov/cdo-web/token.
 }
 \examples{
 \dontrun{

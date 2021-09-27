@@ -1,6 +1,6 @@
 #' Retrieve historical weather data from the NOAA API
 #'
-#' Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data for Central Park, NY using the NOAA API. Must set API key via set_api_key_noaa() prior to use. Request key here get key here https://www.ncdc.noaa.gov/cdo-web/token
+#' Returns daily temperature (Fahrenheit), precipitation (T/F), or wind (mph) data using the NOAA API. Must set API key via set_api_key_noaa() prior to use. Request key here get key here https://www.ncdc.noaa.gov/cdo-web/token.
 #'
 #' @param .date_start the starting date to retrieve data for
 #' @param .date_end the end date to retrieve data for
@@ -9,10 +9,9 @@
 #' @return a tibble of weather data
 #'
 #' @import httr
-#' @importFrom dplyr transmute select mutate as_tibble
+#' @importFrom dplyr transmute select mutate as_tibble left_join ends_with
 #' @importFrom purrr map_dfr
 #' @importFrom tidyr pivot_wider
-#' @importFrom tibble add_column
 #'
 #' @references https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 #'
@@ -56,8 +55,9 @@ get_noaa <- function(.date_start, .date_end, noaa_station){
   # clean up dataframe
   resp_df <- transmute(resp_df, date = as.Date(date), datatype = datatype, value = value)
   resp_df <- pivot_wider(resp_df, names_from = datatype)
-  cols <- c(date = NA, TMAX = NA, PRCP = NA, WSF2 = NA)
-  resp_df <- add_column(resp_df, !!!cols[setdiff(names(cols), names(resp_df))])
+  resp_df <- left_join(tibble(date = resp_df$date, TMAX = NA, PRCP = NA, WSF2 = NA), resp_df, by = 'date')
+  resp_df <- select(resp_df, date, !ends_with('x'))
+  colnames(resp_df) <- gsub(".y$", "", colnames(resp_df))
   resp_df <- select(resp_df, date, temperature = TMAX, precipitation = PRCP, wind = WSF2)
   resp_df <- mutate(resp_df,
                     precipitation = precipitation > 0.1,

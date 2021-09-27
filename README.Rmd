@@ -51,11 +51,22 @@ set_api_key_openweather("<token>")
 
 Please credit NOAA and/or OpenWeather as your weather data provider depending on your use.
 
+## Data description
+
+The data comes from different sources and is aggregated to best provide consistent measures. Some caution is necessary if you require precise estimates as definitions slightly differ across the data sources. 
+
+| Type        | Source      | Dataset                         | Temperature | Precipitation             | Wind         |
+|-------------|-------------|---------------------------------|-------------|---------------------------|--------------|
+| Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`      | `PRCP` > 0.1 inches       | `WSF2`       |
+| Last 5 days | OpenWeather | One-call time machine "current" | `temp`      | `weather-main` == 'Rain'  | `wind_speed` |
+| Forecast    | OpenWeather | One-call "daily"                | `temp$max`  | `pop` (probability) > 0.3 | `wind_speed` |
+
+For more detailed weather data, check out the R packages [rnoaa](https://github.com/ropensci/rnoaa) and [owmr](https://github.com/crazycapivara/owmr). These provide nuanced control over requesting data from the NOAA and OpenWeather APIs.
+
+
 ## Todo
 
-- Remove `tibble` dependency
 - Figure out how to run tests w/o explicit API key
-- Double check documentation is correct for weather variables
 - Implement rate limiting messages?
 - Add 'show_requests' argument to get_weather
 - Add API key test to set_* functions?

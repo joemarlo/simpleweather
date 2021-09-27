@@ -30,16 +30,16 @@ get_weather(dates, lat, long)
 #> # A tibble: 10 × 6
 #>    date       temperature precipitation  wind is_forecast source     
 #>    <date>           <dbl> <lgl>         <dbl> <lgl>       <chr>      
-#>  1 2021-09-19        78   FALSE         18.1  FALSE       NOAA       
-#>  2 2021-09-20        76   FALSE         15    FALSE       NOAA       
-#>  3 2021-09-21        66.8 FALSE          6.62 FALSE       OpenWeather
-#>  4 2021-09-22        72.2 FALSE          4    FALSE       OpenWeather
-#>  5 2021-09-23        75.5 FALSE          5.01 FALSE       OpenWeather
-#>  6 2021-09-24        69.8 TRUE           5.75 FALSE       OpenWeather
-#>  7 2021-09-25        67.8 FALSE          6.91 FALSE       OpenWeather
-#>  8 2021-09-26        72.3 FALSE         15.5  TRUE        OpenWeather
-#>  9 2021-09-27        78.2 FALSE         15.8  TRUE        OpenWeather
-#> 10 2021-09-28        73.5 TRUE          10.1  TRUE        OpenWeather
+#>  1 2021-09-20        76   FALSE         15    FALSE       NOAA       
+#>  2 2021-09-21        77   FALSE         15    FALSE       NOAA       
+#>  3 2021-09-22        70.9 TRUE           4.83 FALSE       OpenWeather
+#>  4 2021-09-23        75.5 FALSE          5.01 FALSE       OpenWeather
+#>  5 2021-09-24        69.8 TRUE           5.75 FALSE       OpenWeather
+#>  6 2021-09-25        67.8 FALSE          6.91 FALSE       OpenWeather
+#>  7 2021-09-26        69.2 FALSE          0    FALSE       OpenWeather
+#>  8 2021-09-27        79.7 FALSE         16.6  TRUE        OpenWeather
+#>  9 2021-09-28        75.1 TRUE          11.3  TRUE        OpenWeather
+#> 10 2021-09-29        70.2 FALSE         12.3  TRUE        OpenWeather
 ```
 
 ## Installation and setup
@@ -69,11 +69,26 @@ set_api_key_openweather("<token>")
 Please credit NOAA and/or OpenWeather as your weather data provider
 depending on your use.
 
+## Data description
+
+The data comes from different sources and is aggregated to best provide
+consistent measures. Some caution is necessary if you require precise
+estimates as definitions slightly differ across the data sources.
+
+| Type        | Source      | Dataset                         | Temperature | Precipitation                | Wind         |
+|-------------|-------------|---------------------------------|-------------|------------------------------|--------------|
+| Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`      | `PRCP` &gt; 0.1 inches       | `WSF2`       |
+| Last 5 days | OpenWeather | One-call time machine “current” | `temp`      | `weather-main` == ‘Rain’     | `wind_speed` |
+| Forecast    | OpenWeather | One-call “daily”                | `temp$max`  | `pop` (probability) &gt; 0.3 | `wind_speed` |
+
+For more detailed weather data, check out the R packages
+[rnoaa](https://github.com/ropensci/rnoaa) and
+[owmr](https://github.com/crazycapivara/owmr). These provide nuanced
+control over requesting data from the NOAA and OpenWeather APIs.
+
 ## Todo
 
--   Remove `tibble` dependency
 -   Figure out how to run tests w/o explicit API key
--   Double check documentation is correct for weather variables
 -   Implement rate limiting messages?
 -   Add ‘show\_requests’ argument to get\_weather
 -   Add API key test to set\_\* functions?
