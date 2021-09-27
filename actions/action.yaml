@@ -11,6 +11,12 @@ inputs:
   check-dir:
     description: 'Where should the check output go?'
     default: '"check"'
+  TOKEN_NOAA:
+    description: "NOAA API key"
+    required: true
+  TOKEN_OPENWEATHER:
+    description: "OpenWeather API key"
+    required: true
 runs:
   using: "composite"
   steps:
