@@ -11,10 +11,10 @@ inputs:
   check-dir:
     description: 'Where should the check output go?'
     default: '"check"'
-  TOKEN_NOAA:
+  token_noaa:
     description: "NOAA API key"
     required: true
-  TOKEN_OPENWEATHER:
+  token_openweather:
     description: "OpenWeather API key"
     required: true
 runs:
