@@ -26,8 +26,6 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      token_noaa: ${{ secrets.TOKEN_NOAA }}
-      token_openweather: ${{ secrets.TOKEN_OPENWEATHER }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
@@ -46,6 +44,9 @@ jobs:
           extra-packages: rcmdcheck
 
       - uses: r-lib/actions/check-r-package@v1
+        env:
+          token_noaa: ${{ secrets.TOKEN_NOAA }}
+          token_openweather: ${{ secrets.TOKEN_OPENWEATHER }}
 
       - name: Show testthat output
         if: always()
