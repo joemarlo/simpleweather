@@ -6,7 +6,7 @@ Authors@R:
            family = "Marlo",
            role = c("aut", "cre"),
            email = "joe.marlo.09@gmail.com")
-Description: simpleweather is an R package that provides a simple interface to get historical and forecasted weather. It does one thing: retrieve weather data for a given latitude, longitude location. No anguish to figure out which data source to use, esoteric weather variable to pick, or weather station to choose.
+Description: simpleweather is an R package that provides a simple interface to get historical and forecasted weather. It does one thing: retrieve basic weather data for a given latitude, longitude location. No anguish to figure out which data source to use, esoteric weather variable to pick, or weather station to choose.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -6,13 +6,15 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/joemarlo/simpleweather/workflows/R-CMD-check/badge.svg)](https://github.com/joemarlo/simpleweather/actions)
+[![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2021--09--27-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 simpleweather is an R package that provides a simple interface to get
-historical and forecasted weather. It does one thing: retrieve weather
-data for a given latitude, longitude location. No anguish to figure out
-which data source to use, esoteric weather variable to pick, or weather
-station to choose.
+historical and forecasted weather. It does one thing: retrieve basic
+weather data for a given latitude, longitude location. No anguish to
+figure out which data source to use, esoteric weather variable to pick,
+or weather station to choose.
 
 simpleweather is focused and therefore limited to only providing the
 temperature (daily max in Fahrenheit), precipitation (True/False), and

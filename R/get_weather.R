@@ -254,7 +254,7 @@ get_weather <- function(.dates, lat, long){
 
   # construct dataframe and ensure its the same order as the original vector
   weather_data <- bind_rows(OpenWeather_forecast, OpenWeather_historical, NOAA)
-  weather_data <- distinct(weather_data)
+  weather_data <- distinct(weather_data, date, .keep_all = TRUE)
   weather_data <- left_join(tibble(date = .dates), weather_data, by = 'date')
 
   # make sure output is same length as input
