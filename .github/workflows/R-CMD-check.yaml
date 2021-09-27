@@ -43,10 +43,7 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
-      - uses: r-lib/actions/check-r-package@v1
-        env:
-          token_noaa: ${{ secrets.TOKEN_NOAA }}
-          token_openweather: ${{ secrets.TOKEN_OPENWEATHER }}
+      - uses: joemarlo/simpleweather/actions@main
 
       - name: Show testthat output
         if: always()
