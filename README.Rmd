@@ -59,7 +59,7 @@ The data comes from different sources and is aggregated to best provide consiste
 |-------------|-------------|---------------------------------|-------------|---------------------------|--------------|
 | Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`      | `PRCP` > 0.1 inches       | `WSF2`       |
 | Last 5 days | OpenWeather | One-call time machine "current" | `temp`      | `weather-main` == 'Rain'  | `wind_speed` |
-| Forecast    | OpenWeather | One-call "daily"                | `temp$max`  | `pop` (probability) > 0.3 | `wind_speed` |
+| Forecast    | OpenWeather | One-call "daily"                | `temp-max`  | `pop` (probability) > 0.3 | `wind_speed` |
 
 For more detailed weather data, check out the R packages [rnoaa](https://github.com/ropensci/rnoaa) and [owmr](https://github.com/crazycapivara/owmr). These provide nuanced control over requesting data from the NOAA and OpenWeather APIs.
 

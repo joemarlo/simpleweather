@@ -53,12 +53,13 @@ get_noaa <- function(.date_start, .date_end, noaa_station){
   resp_df <- map_dfr(resp_content, as_tibble)
 
   # clean up dataframe
+  value <- precipitation <- NULL # only to satisfy CMD check 'no visible binding for global variable' note
   resp_df <- transmute(resp_df, date = as.Date(date), datatype = datatype, value = value)
   resp_df <- pivot_wider(resp_df, names_from = datatype)
   resp_df <- left_join(tibble(date = resp_df$date, TMAX = NA, PRCP = NA, WSF2 = NA), resp_df, by = 'date')
   resp_df <- select(resp_df, date, !ends_with('x'))
   colnames(resp_df) <- gsub(".y$", "", colnames(resp_df))
-  resp_df <- select(resp_df, date, temperature = TMAX, precipitation = PRCP, wind = WSF2)
+  resp_df <- select(resp_df, date, temperature = 'TMAX', precipitation = 'PRCP', wind = 'WSF2')
   resp_df <- mutate(resp_df,
                     precipitation = precipitation > 0.1,
                     is_forecast = FALSE,

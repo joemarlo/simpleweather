@@ -79,7 +79,7 @@ estimates as definitions slightly differ across the data sources.
 |-------------|-------------|---------------------------------|-------------|------------------------------|--------------|
 | Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`      | `PRCP` &gt; 0.1 inches       | `WSF2`       |
 | Last 5 days | OpenWeather | One-call time machine “current” | `temp`      | `weather-main` == ‘Rain’     | `wind_speed` |
-| Forecast    | OpenWeather | One-call “daily”                | `temp$max`  | `pop` (probability) &gt; 0.3 | `wind_speed` |
+| Forecast    | OpenWeather | One-call “daily”                | `temp-max`  | `pop` (probability) &gt; 0.3 | `wind_speed` |
 
 For more detailed weather data, check out the R packages
 [rnoaa](https://github.com/ropensci/rnoaa) and
