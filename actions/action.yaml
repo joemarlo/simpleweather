@@ -23,9 +23,9 @@ runs:
     - name: Check
       env:
         _R_CHECK_CRAN_INCOMING_: false
-        token_noaa: ${{ inputs.token_noaa }}
-        token_openweather: ${{ inputs.token_openweather }}
       run: |
+        Sys.setenv("token_noaa" = "${{ inputs.token_noaa }}")
+        Sys.setenv("token_openweather" = "${{ inputs.token_openweather }}")
         options(crayon.enabled = TRUE)
         rcmdcheck::rcmdcheck(args = c(${{ inputs.args }}), error_on = ${{ inputs.error-on }}, check_dir = ${{ inputs.check-dir }})
       shell: Rscript {0}
