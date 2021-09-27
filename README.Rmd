@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 simpleweather is an R package that provides a simple interface to get historical and forecasted weather. It does one thing: retrieve basic weather data for a given latitude, longitude location. No anguish to figure out which data source to use, esoteric weather variable to pick, or weather station to choose.
 
-simpleweather is focused and therefore limited to only providing the temperature (daily max in Fahrenheit), precipitation (True/False), and the wind speed (fastest 2-minute speed in mph). The package leverages NOAA for historical data and OpenWeather for the latest data.
+simpleweather is focused and therefore limited to only providing temperature (daily max in Fahrenheit), precipitation (True/False), and wind speed (mph). The package leverages NOAA for historical data and OpenWeather for the latest data.
 
 ```{r example}
 library(simpleweather)
@@ -47,8 +47,8 @@ Requires API keys for the [NOAA API](https://www.ncdc.noaa.gov/cdo-web/webservic
 And then log your API keys via the set_api_key_* functions.
 
 ``` r
-set_api_key_noaa("<token>")
-set_api_key_openweather("<token>")
+set_api_key_noaa("<key>")
+set_api_key_openweather("<key>")
 ```
 
 Please credit NOAA and/or OpenWeather as your weather data provider depending on your use.
@@ -57,7 +57,7 @@ Please credit NOAA and/or OpenWeather as your weather data provider depending on
 
 The data comes from different sources and is aggregated to best provide consistent measures. Some caution is necessary if you require precise estimates as definitions slightly differ across the data sources. 
 
-| Type        | Source      | Dataset                         | Temperature | Precipitation             | Wind         |
+| Period      | Source      | Dataset                         | Temperature | Precipitation             | Wind         |
 |-------------|-------------|---------------------------------|-------------|---------------------------|--------------|
 | Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`      | `PRCP` > 0.1 inches       | `WSF2`       |
 | Last 5 days | OpenWeather | One-call time machine "current" | `temp`      | `weather-main` == 'Rain'  | `wind_speed` |

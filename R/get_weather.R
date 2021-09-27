@@ -215,8 +215,8 @@ get_openweather_historical <- function(lat, long){
 get_weather <- function(.dates, lat, long){
 
   dates <- as.Date(.dates)
-  if (!inherits(dates, 'Date')) stop('.dates must be coercible to date format')
-  if (max(dates) > Sys.Date() + 7) warning('Forecasts only available for the next seven days.')
+  if (!inherits(dates, 'Date')) stop('.dates must be coercible to date format', call. = FALSE)
+  if (max(dates) > Sys.Date() + 7) warning('Forecasts only available for the next seven days', call. = FALSE)
 
   # figure out which dates require which API
   current_date <- Sys.Date()
@@ -244,7 +244,7 @@ get_weather <- function(.dates, lat, long){
 
     # break dates into 6 month segments b/c API restrictions
     breaks <- seq(date_start, date_end, by = '6 months')
-    breaks <- as.Date(union(breaks, date_end), origin = '1970-01-01')
+    breaks <- sort(as.Date(union(breaks, date_end), origin = '1970-01-01'))
     date_starts <- breaks[-length(breaks)]
     date_ends <- breaks[-1]
 

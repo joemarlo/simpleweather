@@ -26,6 +26,8 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      token_noaa: ${{ secrets.TOKEN_NOAA }}
+      token_openweather: ${{ secrets.TOKEN_OPENWEATHER }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:

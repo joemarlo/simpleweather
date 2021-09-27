@@ -16,10 +16,10 @@ weather data for a given latitude, longitude location. No anguish to
 figure out which data source to use, esoteric weather variable to pick,
 or weather station to choose.
 
-simpleweather is focused and therefore limited to only providing the
+simpleweather is focused and therefore limited to only providing
 temperature (daily max in Fahrenheit), precipitation (True/False), and
-the wind speed (fastest 2-minute speed in mph). The package leverages
-NOAA for historical data and OpenWeather for the latest data.
+wind speed (mph). The package leverages NOAA for historical data and
+OpenWeather for the latest data.
 
 ``` r
 library(simpleweather)
@@ -34,14 +34,14 @@ get_weather(dates, lat, long)
 #>    <date>           <dbl> <lgl>         <dbl> <lgl>       <chr>      
 #>  1 2021-09-20        76   FALSE         15    FALSE       NOAA       
 #>  2 2021-09-21        77   FALSE         15    FALSE       NOAA       
-#>  3 2021-09-22        70.9 TRUE           4.83 FALSE       OpenWeather
+#>  3 2021-09-22        71.8 TRUE           5.06 FALSE       OpenWeather
 #>  4 2021-09-23        75.5 FALSE          5.01 FALSE       OpenWeather
 #>  5 2021-09-24        69.8 TRUE           5.75 FALSE       OpenWeather
 #>  6 2021-09-25        67.8 FALSE          6.91 FALSE       OpenWeather
 #>  7 2021-09-26        69.2 FALSE          0    FALSE       OpenWeather
-#>  8 2021-09-27        79.7 FALSE         16.6  TRUE        OpenWeather
-#>  9 2021-09-28        75.1 TRUE          11.3  TRUE        OpenWeather
-#> 10 2021-09-29        70.2 FALSE         12.3  TRUE        OpenWeather
+#>  8 2021-09-27        78.9 FALSE         16.8  TRUE        OpenWeather
+#>  9 2021-09-28        77.8 TRUE          11.9  TRUE        OpenWeather
+#> 10 2021-09-29        70.3 FALSE         12.6  TRUE        OpenWeather
 ```
 
 ## Installation and setup
@@ -64,8 +64,8 @@ only available for the United States.
 And then log your API keys via the set\_api\_key\_\* functions.
 
 ``` r
-set_api_key_noaa("<token>")
-set_api_key_openweather("<token>")
+set_api_key_noaa("<key>")
+set_api_key_openweather("<key>")
 ```
 
 Please credit NOAA and/or OpenWeather as your weather data provider
@@ -77,7 +77,7 @@ The data comes from different sources and is aggregated to best provide
 consistent measures. Some caution is necessary if you require precise
 estimates as definitions slightly differ across the data sources.
 
-| Type        | Source      | Dataset                         | Temperature | Precipitation                | Wind         |
+| Period      | Source      | Dataset                         | Temperature | Precipitation                | Wind         |
 |-------------|-------------|---------------------------------|-------------|------------------------------|--------------|
 | Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`      | `PRCP` &gt; 0.1 inches       | `WSF2`       |
 | Last 5 days | OpenWeather | One-call time machine “current” | `temp`      | `weather-main` == ‘Rain’     | `wind_speed` |
