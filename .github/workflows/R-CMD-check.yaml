@@ -44,6 +44,9 @@ jobs:
           extra-packages: rcmdcheck
 
       - uses: joemarlo/simpleweather/actions@main
+        with:
+          token_noaa: ${{ secrets.TOKEN_NOAA }}
+          token_openweather: ${{ secrets.TOKEN_OPENWEATHER }}
 
       - name: Show testthat output
         if: always()

@@ -17,8 +17,8 @@ runs:
     - name: Check
       env:
         _R_CHECK_CRAN_INCOMING_: false
-        token_noaa: ${{ secrets.TOKEN_NOAA }}
-        token_openweather: ${{ secrets.TOKEN_OPENWEATHER }}
+        token_noaa: ${{ inputs.TOKEN_NOAA }}
+        token_openweather: ${{ inputs.TOKEN_OPENWEATHER }}
       run: |
         options(crayon.enabled = TRUE)
         rcmdcheck::rcmdcheck(args = c(${{ inputs.args }}), error_on = ${{ inputs.error-on }}, check_dir = ${{ inputs.check-dir }})
