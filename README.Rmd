@@ -57,11 +57,11 @@ Please credit NOAA and/or OpenWeather as your weather data provider depending on
 
 The data comes from different sources and is aggregated to best provide consistent measures. Some caution is necessary if you require precise estimates as definitions slightly differ across the data sources. 
 
-| Period      | Source      | Dataset                         | Temperature | Precipitation             | Wind         |
-|-------------|-------------|---------------------------------|-------------|---------------------------|--------------|
-| Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`      | `PRCP` > 0.1 inches       | `WSF2`       |
-| Last 5 days | OpenWeather | One-call time machine "current" | `temp`      | `weather-main` == 'Rain'  | `wind_speed` |
-| Forecast    | OpenWeather | One-call "daily"                | `temp-max`  | `pop` (probability) > 0.3 | `wind_speed` |
+| Type        | Source      | Dataset                         | Temperature                       | Precipitation                                                     | Wind                                     |
+|-------------|-------------|---------------------------------|-----------------------------------|-------------------------------------------------------------------|------------------------------------------|
+| Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`: Max daily temperature     | `PRCP` > 0.1 inches                                               | `WSF2`: fastest 2-minute speed in mph    |
+| Last 5 days | OpenWeather | One-call time machine "current" | `temp`: TBD                       | `weather-main` one of ('Thunderstorm', 'Drizzle', 'Rain', 'Snow') | `wind_speed`: reported wind speed in mph |
+| Forecast    | OpenWeather | One-call "daily"                | `temp$max`: Max daily temperature | `pop` (probability of precipitation) > 0.3                        | `wind_speed`: reported wind speed in mph |
 
 For more detailed weather data, check out the R packages [rnoaa](https://github.com/ropensci/rnoaa) and [owmr](https://github.com/crazycapivara/owmr). These provide nuanced control over requesting data from the NOAA and OpenWeather APIs.
 
@@ -69,5 +69,4 @@ For more detailed weather data, check out the R packages [rnoaa](https://github.
 ## Todo
 
 - Implement rate limiting messages?
-- Add 'show_requests' argument to get_weather
-- Add API key test to set_* functions?
+- Figure out timestamp of OpenWeather last 5 days

@@ -6,8 +6,6 @@ weather <- get_weather(dates, lat, long)
 
 test_that("get_weather returns a dataframe with the correct length", {
   expect_true(inherits(weather, 'data.frame'))
-  expect_equal(nrow(weather), length(dates))
+  expect_true(identical(dates, weather$date))
   expect_equal(colnames(weather), c("date", "temperature", "precipitation", "wind", "is_forecast", "source"))
 })
-
-

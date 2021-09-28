@@ -13,8 +13,6 @@ set_key_ <- function(.name, api_key, install, overwrite){
 
   if (!is.character(api_key)) stop('api_key must be a character string')
 
-  # TODO: test API key validity?
-
   # set the key for this session
   expr <- paste0("Sys.setenv(", .name, " = '", api_key, "')")
   eval(parse(text = expr))
@@ -68,6 +66,7 @@ set_key_ <- function(.name, api_key, install, overwrite){
 #' set_api_key_noaa("<key>")
 #' }
 set_api_key_noaa <- function(api_key, install = FALSE, overwrite = FALSE){
+  # TODO: test API key validity?
   set_key_(.name = "token_noaa", api_key = api_key, install = install, overwrite = overwrite)
 }
 
@@ -87,5 +86,6 @@ set_api_key_noaa <- function(api_key, install = FALSE, overwrite = FALSE){
 #' set_api_key_openweather("<key>")
 #' }
 set_api_key_openweather <- function(api_key, install = FALSE, overwrite = FALSE){
+  # TODO: test API key validity?
   set_key_(.name = "token_openweather", api_key = api_key, install = install, overwrite = overwrite)
 }

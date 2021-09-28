@@ -170,15 +170,21 @@ get_openweather_historical <- function(lat, long){
     args <- paste(lat, long, units, dt, token, sep = '&')
     url_complete <- paste0(url_base, args)
 
+    # TODO: is 'current' returning the weather at the hour of the call?
+
     # make the GET request and flatten the response into a dataframe
     resp <- GET(url_complete, user_agent('https://github.com/joemarlo/simpleweather'))
     stop_for_status(resp)
     warn_for_status(resp)
     resp_content <- content(resp)$current
-    resp_df <- tibble(date = as.Date(as.POSIXct(resp_content$dt, origin = "1970-01-01")),
-                      temperature = resp_content$temp,
-                      precipitation = resp_content$weather[[1]]$main == 'Rain', # not a perfect solution but seems to work
-                      wind = resp_content$wind_speed,
+    date <- as.Date(as.POSIXct(resp_content$dt, origin = "1970-01-01"))
+    temp <- resp_content$temp
+    precip <- resp_content$weather[[1]]$main %in% c('Thunderstorm', 'Drizzle', 'Rain', 'Snow') # https://openweathermap.org/weather-conditions
+    wind <- resp_content$wind_speed
+    resp_df <- tibble(date = date,
+                      temperature = temp,
+                      precipitation = precip,
+                      wind = wind,
                       is_forecast = FALSE,
                       source = 'OpenWeather')
 

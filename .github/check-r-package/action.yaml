@@ -1,6 +1,6 @@
 name: 'check-r-package'
 description: 'Action to check R package with rcmdcheck. Assumes that rcmdcheck has already been installed.'
-author: 'Jim Hester'
+author: 'Jim Hester, modified by Joe Marlo'
 inputs:
   args:
     description: 'Arguments to pass to the `args` parameter of rcmdcheck'
