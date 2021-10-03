@@ -57,16 +57,15 @@ Please credit NOAA and/or OpenWeather as your weather data provider depending on
 
 The data comes from different sources and is aggregated to best provide consistent measures. Some caution is necessary if you require precise estimates as definitions slightly differ across the data sources. 
 
-| Type        | Source      | Dataset                         | Temperature                       | Precipitation                                                     | Wind                                     |
-|-------------|-------------|---------------------------------|-----------------------------------|-------------------------------------------------------------------|------------------------------------------|
-| Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`: Max daily temperature     | `PRCP` > 0.1 inches                                               | `WSF2`: fastest 2-minute speed in mph    |
-| Last 5 days | OpenWeather | One-call time machine "current" | `temp`: TBD                       | `weather-main` one of ('Thunderstorm', 'Drizzle', 'Rain', 'Snow') | `wind_speed`: reported wind speed in mph |
-| Forecast    | OpenWeather | One-call "daily"                | `temp$max`: Max daily temperature | `pop` (probability of precipitation) > 0.3                        | `wind_speed`: reported wind speed in mph |
+| Type        | Source      | Dataset                         | Temperature                               | Precipitation                                                     | Wind                                     |
+|-------------|-------------|---------------------------------|-------------------------------------------|-------------------------------------------------------------------|------------------------------------------|
+| Historical  | NOAA        | Daily summaries (GHCND)         | `TMAX`: Max daily temperature             | `PRCP`: precipitation > 0.1 inches                                               | `WSF2`: fastest 2-minute speed in mph    |
+| Last 5 days | OpenWeather | One-call time machine "hour"    | `temp`: Max of the hourly temperatures    | `weather-main`: description is one of ('Thunderstorm', 'Drizzle', 'Rain', 'Snow') in any hour of the day | `wind_speed`: maximum of the hourly reported wind speed in mph |
+| Forecast    | OpenWeather | One-call "daily"                | `temp$max`: Max daily temperature         | `pop`: probability of precipitation > 0.3                        | `wind_speed`: reported wind speed in mph |
 
 For more detailed weather data, check out the R packages [rnoaa](https://github.com/ropensci/rnoaa) and [owmr](https://github.com/crazycapivara/owmr). These provide nuanced control over requesting data from the NOAA and OpenWeather APIs.
 
 
 ## Todo
 
-- Implement rate limiting messages?
-- Figure out timestamp of OpenWeather last 5 days
+- Set key install doesn't work on Macs (b/c permissions?)

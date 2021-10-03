@@ -29,7 +29,7 @@ get_closest_noaa_station <- function(.date_start, .date_end, lat, long){
 
   # construct call to NOAA API to get all the stations that are close
   token <- Sys.getenv('token_noaa')
-  if (token == '') stop('No API key set for NOAA. Please use simpleweather::set_api_key_noaa()', call. = FALSE)
+  if (identical(token, '')) stop('No API key set for NOAA. Please use simpleweather::set_api_key_noaa()', call. = FALSE)
   date_start_char <- paste0('startdate=', date_start)
   date_end_char <- paste0('enddate=', date_end)
   range <- 1

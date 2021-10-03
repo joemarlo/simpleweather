@@ -4,20 +4,16 @@
 \alias{set_api_key_openweather}
 \title{Set API key for OpenWeather}
 \usage{
-set_api_key_openweather(api_key, install = FALSE, overwrite = FALSE)
+set_api_key_openweather(api_key)
 }
 \arguments{
 \item{api_key}{the api key string}
-
-\item{install}{should the key be installed to the .Renviron file for use in future sessions?}
-
-\item{overwrite}{if a key is already installed, should it be overwritten?}
 }
 \description{
 Set your OpenWeather API key. This stores it as an environment variable so it can be used with simpleweather functions. You can install the key to your .Renviron so calling this function is not required for each R session.
 }
 \details{
-You can obtain an API key for free here: https://openweathermap.org/api/one-call-api
+You can obtain an API key for free here: https://openweathermap.org/api/
 }
 \examples{
 \dontrun{

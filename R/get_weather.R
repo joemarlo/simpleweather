@@ -33,7 +33,7 @@ get_noaa <- function(.date_start, .date_end, noaa_station){
 
   # construct call to NOAA API
   token <- Sys.getenv('token_noaa')
-  if (token == '') stop('No API key set for NOAA. Please use simpleweather::set_api_key_noaa()', call. = FALSE)
+  if (identical(token, '')) stop('No API key set for NOAA. Please use simpleweather::set_api_key_noaa()', call. = FALSE)
   date_start_char <- paste0('startdate=', date_start)
   date_end_char <- paste0('enddate=', date_end)
   station <- paste0('stationid=', noaa_station) # GHCND:USW00094728 Central Park
@@ -93,7 +93,7 @@ get_openweather_forecast <- function(lat, long){
 
   # construct call to OpenWeather API
   token <- Sys.getenv('token_openweather')
-  if (token == '') stop('No API key set for OpenWeather. Please use simpleweather::set_api_key_openweather()', call. = FALSE)
+  if (identical(token, '')) stop('No API key set for OpenWeather. Please use simpleweather::set_api_key_openweather()', call. = FALSE)
   token <- paste0('appid=', token)
   lat <- paste0('lat=', lat) #40.7812
   long <- paste0('lon=', long) #-73.9665'
@@ -154,7 +154,7 @@ get_openweather_historical <- function(lat, long){
 
   # construct call to OpenWeather API
   token <- Sys.getenv('token_openweather')
-  if (token == '') stop('No API key set for OpenWeather. Please use simpleweather::set_api_key_openweather()', call. = FALSE)
+  if (identical(token, '')) stop('No API key set for OpenWeather. Please use simpleweather::set_api_key_openweather()', call. = FALSE)
   token <- paste0('appid=', token)
   lat <- paste0('lat=', lat) #40.7812
   long <- paste0('lon=', long) #-73.9665'
@@ -170,17 +170,22 @@ get_openweather_historical <- function(lat, long){
     args <- paste(lat, long, units, dt, token, sep = '&')
     url_complete <- paste0(url_base, args)
 
-    # TODO: is 'current' returning the weather at the hour of the call?
-
-    # make the GET request and flatten the response into a dataframe
+    # make the GET request
     resp <- GET(url_complete, user_agent('https://github.com/joemarlo/simpleweather'))
     stop_for_status(resp)
     warn_for_status(resp)
-    resp_content <- content(resp)$current
-    date <- as.Date(as.POSIXct(resp_content$dt, origin = "1970-01-01"))
-    temp <- resp_content$temp
-    precip <- resp_content$weather[[1]]$main %in% c('Thunderstorm', 'Drizzle', 'Rain', 'Snow') # https://openweathermap.org/weather-conditions
-    wind <- resp_content$wind_speed
+
+    # flatten the response into a dataframe
+    # we're pulling hourly data here so we define
+    #   max temp as max of all 24 hours
+    #   precip as if there are any precip in any hour
+    #   wind as max wind speed of all 24 hours
+    resp_content <- content(resp)$hour
+    date <- as.Date(as.POSIXct(resp_content[[1]]$dt, origin = "1970-01-01"))
+    temp <- max(sapply(resp_content, function(hour) hour$temp))
+    precip <- sapply(resp_content, function(hour) hour$weather[[1]]$id)
+    precip <- any(grepl('^(2|3|5|6)', precip)) # https://openweathermap.org/weather-conditions
+    wind <- max(sapply(resp_content, function(hour) hour$wind_speed))
     resp_df <- tibble(date = date,
                       temperature = temp,
                       precipitation = precip,
