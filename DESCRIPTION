@@ -1,5 +1,5 @@
 Package: simpleweather
-Title: Simply retrives weather data
+Title: Simply retrieve weather data
 Version: 0.2.0.9000
 Authors@R: 
     person(given = "Joseph",

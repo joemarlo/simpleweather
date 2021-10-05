@@ -53,7 +53,7 @@ set_api_key_openweather("<key>")
 
 Please credit NOAA and/or OpenWeather as your weather data provider depending on your use.
 
-## Data description
+## Data definitions
 
 The data comes from different sources and is aggregated to best provide consistent measures. Some caution is necessary if you require precise estimates as definitions slightly differ across the data sources. 
 
@@ -68,4 +68,5 @@ For more detailed weather data, check out the R packages [rnoaa](https://github.
 
 ## Todo
 
+- Fix issue with 5 days prior OpenWeather data. Probably due to overlap with UTC time
 - Set key install doesn't work on Macs (b/c permissions?)

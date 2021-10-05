@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/joemarlo/simpleweather/workflows/R-CMD-check/badge.svg)](https://github.com/joemarlo/simpleweather/actions)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2021--10--03-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2021--10--04-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 simpleweather is an R package that provides a simple interface to get
@@ -27,21 +27,21 @@ dates <- Sys.Date() + -7:2
 lat <- 40.7812
 long <- -73.9665
 get_weather(dates, lat, long)
-#> Using NOAA station NY CITY CENTRAL PARK, NY US
+#> Using NOAA station LAGUARDIA AIRPORT, NY US
 #> OpenWeather uses exact latitude, longitude provided
 #> # A tibble: 10 × 6
 #>    date       temperature precipitation  wind is_forecast source     
 #>    <date>           <dbl> <lgl>         <dbl> <lgl>       <chr>      
-#>  1 2021-09-26        71   FALSE         13    FALSE       NOAA       
-#>  2 2021-09-27        78   FALSE         NA    FALSE       NOAA       
-#>  3 2021-09-28        72.1 TRUE          11.0  FALSE       OpenWeather
-#>  4 2021-09-29        69.4 TRUE           7    FALSE       OpenWeather
-#>  5 2021-09-30        65.2 FALSE          7    FALSE       OpenWeather
-#>  6 2021-10-01        67.1 FALSE          5.01 FALSE       OpenWeather
-#>  7 2021-10-02        76.0 FALSE          8.99 FALSE       OpenWeather
-#>  8 2021-10-03        78.5 TRUE           8.57 TRUE        OpenWeather
-#>  9 2021-10-04        73.7 TRUE           7.78 TRUE        OpenWeather
-#> 10 2021-10-05        70.0 FALSE         10.2  TRUE        OpenWeather
+#>  1 2021-09-27        82   FALSE         23    FALSE       NOAA       
+#>  2 2021-09-28        75   FALSE         21    FALSE       NOAA       
+#>  3 2021-09-29        NA   NA            NA    NA          <NA>       
+#>  4 2021-09-30        65.2 FALSE          7    FALSE       OpenWeather
+#>  5 2021-10-01        67.1 FALSE          5.01 FALSE       OpenWeather
+#>  6 2021-10-02        76.0 FALSE          8.99 FALSE       OpenWeather
+#>  7 2021-10-03        77.7 FALSE         12.0  FALSE       OpenWeather
+#>  8 2021-10-04        70.0 TRUE          11.2  TRUE        OpenWeather
+#>  9 2021-10-05        71.1 FALSE         10.4  TRUE        OpenWeather
+#> 10 2021-10-06        74.5 FALSE          6.31 TRUE        OpenWeather
 ```
 
 ## Installation and setup
@@ -71,7 +71,7 @@ set_api_key_openweather("<key>")
 Please credit NOAA and/or OpenWeather as your weather data provider
 depending on your use.
 
-## Data description
+## Data definitions
 
 The data comes from different sources and is aggregated to best provide
 consistent measures. Some caution is necessary if you require precise
@@ -90,4 +90,6 @@ control over requesting data from the NOAA and OpenWeather APIs.
 
 ## Todo
 
+-   Fix issue with 5 days prior OpenWeather data. Probably due to
+    overlap with UTC time
 -   Set key install doesn’t work on Macs (b/c permissions?)

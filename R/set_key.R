@@ -106,8 +106,8 @@ test_key_noaa <- function(){
 
   # make the GET request and check the reponse code
   resp <- GET(url_complete, add_headers("token" = token), user_agent('https://github.com/joemarlo/simpleweather'))
-  status <- httr::status_code(resp)
-  if (!identical(status, 200L)) stop('API key not accepted by the API. Do you just receive the key? If so, try again in ~15 minutes.')
+  status <- status_code(resp)
+  if (status != 200) stop('API key not accepted by the API. Did you just receive the key? If so, try again in ~15 minutes.')
 }
 
 test_key_openweather <- function(){
@@ -126,6 +126,6 @@ test_key_openweather <- function(){
 
   # make the GET request and check the response code
   resp <- GET(url_complete, user_agent('https://github.com/joemarlo/simpleweather'))
-  status <- httr::status_code(resp)
-  if (!identical(status, 200L)) stop('API key not accepted by the API. Do you just receive the key? If so, try again in ~15 minutes.')
+  status <- status_code(resp)
+  if (status != 200) stop('API key not accepted by the API. Did you just receive the key? If so, try again in ~15 minutes.')
 }

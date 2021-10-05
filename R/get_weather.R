@@ -162,7 +162,7 @@ get_openweather_historical <- function(lat, long){
   url_base <- 'https://api.openweathermap.org/data/2.5/onecall/timemachine?'
 
   # make a call for each of the last 5 days
-  dates <- as.numeric(as.POSIXct(Sys.Date()-1:5))
+  dates <- as.numeric(as.POSIXct(Sys.Date()-1:4)) # TODO: changed from 5 to 4 b/c openweather only allows last 5 days and there is some issue with timezones
   resp_df <- map_dfr(dates, function(dt){
 
     # finish API construction
